@@ -37,8 +37,8 @@ export default class App extends Component {
           <TabNavigator.Item
             selected={this.state.selectedTab === 'home'}
             title="Home"
-            renderIcon={() => <Image source={require('./res/images/ic_favorite.png')} />}
-            renderSelectedIcon={() => <Image source={require('./res/images/ic_favorite.png')} />}
+            renderIcon={() => <Image style={styles.images} source={require('./res/images/ic_favorite.png')} />}
+            renderSelectedIcon={() => <Image style={styles.images} source={require('./res/images/ic_favorite.png')} />}
             badgeText="1"
             onPress={() => this.setState({ selectedTab: 'home' })}>
             <View style={styles.page1}></View>
@@ -46,8 +46,8 @@ export default class App extends Component {
           <TabNavigator.Item
             selected={this.state.selectedTab === 'profile'}
             title="Profile"
-            renderIcon={() => <Image source={require('./res/images/ic_trending.png')} />}
-            renderSelectedIcon={() => <Image source={require('./res/images/ic_trending.png')} />}
+            renderIcon={() => <Image style={styles.images} source={require('./res/images/ic_trending.png')} />}
+            renderSelectedIcon={() => <Image style={styles.images} source={require('./res/images/ic_trending.png')} />}
             onPress={() => this.setState({ selectedTab: 'profile' })}>
             <View style={styles.page2}></View>
           </TabNavigator.Item>
@@ -70,5 +70,9 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'yellow'
   },
+  images: {
+    height: 22,
+    width: 22
+  }
   
 });
