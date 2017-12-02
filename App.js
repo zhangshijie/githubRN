@@ -38,7 +38,7 @@ export default class App extends Component {
             selected={this.state.selectedTab === 'home'}
             title="Home"
             renderIcon={() => <Image style={styles.images} source={require('./res/images/ic_favorite.png')} />}
-            renderSelectedIcon={() => <Image style={styles.images} source={require('./res/images/ic_favorite.png')} />}
+            renderSelectedIcon={() => <Image style={[styles.images,{tintColor: 'red'}]} source={require('./res/images/ic_favorite.png')} />}
             badgeText="1"
             onPress={() => this.setState({ selectedTab: 'home' })}>
             <View style={styles.page1}></View>
@@ -47,7 +47,7 @@ export default class App extends Component {
             selected={this.state.selectedTab === 'profile'}
             title="Profile"
             renderIcon={() => <Image style={styles.images} source={require('./res/images/ic_trending.png')} />}
-            renderSelectedIcon={() => <Image style={styles.images} source={require('./res/images/ic_trending.png')} />}
+            renderSelectedIcon={() => <Image style={[styles.images, {tintColor: 'red'}]} source={require('./res/images/ic_trending.png')} />}
             onPress={() => this.setState({ selectedTab: 'profile' })}>
             <View style={styles.page2}></View>
           </TabNavigator.Item>
