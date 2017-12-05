@@ -73,5 +73,10 @@ const MainScreenNavigator = TabNavigator(
       activeTintColor: '#e91e63',
     },
 });
+
+const SimpleApp = StackNavigator({
+  Home: { screen: MainScreenNavigator },
+});
+
   
-export default MainScreenNavigator;
+export default SimpleApp;
