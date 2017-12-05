@@ -6,7 +6,6 @@ import {
   Text,
   View,
   Image,
-  Navigator
 } from 'react-native';
 
 
@@ -28,7 +27,14 @@ export default class Girl extends Component {
     return (
       <View style= {styles.container} >
         <Text style= {styles.text}>  i  am  a girl</Text>
-        <Text style= {styles.text}> 收到: params.word</Text>
+        <Text style= {styles.text}> 收到: {params.word}</Text>
+        <Text style= {styles.text}
+         onPress={
+           ()=>{
+            params.onCallback('一份巧克力');
+            this.props.navigation.goBack()
+           }
+         }> 回赠巧克力</Text>
       </View>)
   }
 

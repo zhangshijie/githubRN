@@ -47,7 +47,7 @@ export default class Boy extends Component {
               }
             })
            }}>送女孩一朵玫瑰</Text>
-          <Text style= {styles.text}>this.props.word</Text> 
+          <Text style= {styles.text}>{this.state.word}</Text> 
       </View>
     )
   }
