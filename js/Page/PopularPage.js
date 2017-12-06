@@ -10,6 +10,7 @@ import {
   Text
 } from 'react-native';
 import DataRepository from '../Expand/Dao/DataRepository'
+import ScrollableTabView , {ScrollableTabBar} from 'react-native-scrollable-tab-view'
 
 const URL = 'https://api.github.com/search/repositories?q=';
 const QUERY_STR = '&sort=starts';
@@ -53,16 +54,13 @@ export default class PopularPage extends Component {
   render(){
     return (
       <View style={styles.container} >
-          <Text onPress={()=>{
-            this.onLoad( );
-          }}
-          style={styles.tips}> 获取数据</Text>
-          <TextInput 
-          style= {{height: 20, borderWidth: 1}}
-          onChange= {text=> this.text = text}
-
-          ></TextInput>
-          <Text style={{height:500}}> {this.state.result} </Text>
+          <ScrollableTabView
+          >
+            <Text tabLabel='Java'> Java</Text>
+            <Text tabLabel='iOS'> iOS </Text>
+            <Text tabLabel='Android'> Android</Text>
+            <Text tabLabel='JS'> JS</Text>
+          </ScrollableTabView>
       </View>
     )
   }
