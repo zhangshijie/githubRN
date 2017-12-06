@@ -16,13 +16,7 @@ const URL = 'https://api.github.com/search/repositories?q=';
 const QUERY_STR = '&sort=starts';
 
 export default class PopularPage extends Component {
-  constructor(props){
-    super(props)
-    this.dataRepository = new DataRepository();
-    this.state = {
-      result:''
-    }
-  }
+
 
   static navigationOptions = {
     tabBarLabel: '最热',
@@ -35,8 +29,36 @@ export default class PopularPage extends Component {
     ),
   };
 
-  onLoad(){
-    this.dataRepository.fetchNetRepository(this.getUrl(this.text))
+  
+  render(){
+    return (
+      <View style={styles.container} >
+          <ScrollableTabView
+          renderTabBar={()=> <ScrollableTabBar/>}
+          >
+            <PopularTab tabLabel='Java'> Java</PopularTab>
+            <PopularTab tabLabel='iOS'> iOS </PopularTab>
+            <PopularTab tabLabel='Android'> Android</PopularTab>
+            <PopularTab tabLabel='JS'> JS</PopularTab>
+          </ScrollableTabView>
+      </View>
+    )
+  }
+}
+
+class PopularTab extends Component {
+  constructor(props){
+    super(props)
+    this.dataRepository = new DataRepository();
+    this.state = {
+      result:''
+    }
+  }
+  componentDidMount(){
+    this.loadData()
+  }
+  loadData(){
+    this.dataRepository.fetchNetRepository(this.getUrl(this.props.tabLabel))
     .then(result => {
       this.setState({
         result:JSON.stringify(result) 
@@ -51,16 +73,11 @@ export default class PopularPage extends Component {
   getUrl (key) { 
     return URL+key+QUERY_STR
   }
+
   render(){
     return (
-      <View style={styles.container} >
-          <ScrollableTabView
-          >
-            <Text tabLabel='Java'> Java</Text>
-            <Text tabLabel='iOS'> iOS </Text>
-            <Text tabLabel='Android'> Android</Text>
-            <Text tabLabel='JS'> JS</Text>
-          </ScrollableTabView>
+      <View>
+        <Text style={{height: 600}}> {this.state.result} </Text>
       </View>
     )
   }
