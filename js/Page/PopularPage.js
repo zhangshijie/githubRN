@@ -1,5 +1,5 @@
 
-import React, { Component } from 'react';
+import React, { Component, PureComponent } from 'react';
 
 import {
   View,
@@ -7,13 +7,14 @@ import {
   Button,
   Image,
   TextInput,
-  Text
+  Text,
+  FlatList
 } from 'react-native';
 import DataRepository from '../Expand/Dao/DataRepository'
 import ScrollableTabView , {ScrollableTabBar} from 'react-native-scrollable-tab-view'
-
+import {RespositoryCell} from './RespositoryCell'
 const URL = 'https://api.github.com/search/repositories?q=';
-const QUERY_STR = '&sort=starts';
+const QUERY_STR = '&sort=stars';
 
 export default class PopularPage extends Component {
 
@@ -51,7 +52,8 @@ class PopularTab extends Component {
     super(props)
     this.dataRepository = new DataRepository();
     this.state = {
-      result:''
+      result:'',
+      dataSouce:[]
     }
   }
   componentDidMount(){
@@ -60,8 +62,10 @@ class PopularTab extends Component {
   loadData(){
     this.dataRepository.fetchNetRepository(this.getUrl(this.props.tabLabel))
     .then(result => {
+      let items = result.items;
       this.setState({
-        result:JSON.stringify(result) 
+        // result:JSON.stringify(result) 
+        dataSouce: items
       })
     })
     .catch(error => {
@@ -74,14 +78,43 @@ class PopularTab extends Component {
     return URL+key+QUERY_STR
   }
 
+  _onPressItem = ((id)=>{
+
+  })
+
+  // _renderItem = ((item)=>{
+  //   <RespositoryCell />
+
+  //   // var txt = '第' + item.index + '个' + ' title=' + item.item.full_name;
+  //   // var bgColor = item.index % 2 == 0 ? 'red' : 'blue';
+  //   // return <Text style={[{flex:1,height:40,backgroundColor:bgColor},styles.txt]}>{txt}</Text>
+  // });
+
+  _renderItem = ({item}) => (
+    <RespositoryCell 
+      description={item.description}
+      avatar_url={item.owner.avatar_url}
+      stargazers_count={item.stargazers_count}
+      full_name={item.full_name}/>
+  );
+
+
+  _keyExtractor = (item, index) => item.id;
+
   render(){
     return (
-      <View>
-        <Text style={{height: 600}}> {this.state.result} </Text>
+      <View style={{flex: 1}}>
+       <FlatList 
+          style={{flex:1}}
+          data={this.state.dataSouce}
+          renderItem={this._renderItem}
+          keyExtractor = {this._keyExtractor}
+       ></FlatList>
       </View>
     )
   }
 }
+
 
 const styles =  StyleSheet.create({
    container: {
