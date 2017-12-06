@@ -9,29 +9,30 @@ import {
   Image,
 } from 'react-native';
 import {StackNavigator} from 'react-navigation';
+import PopularPage from '../Page/PopularPage'
 
 
-class HotScreen extends React.Component {
-  static navigationOptions = {
-    tabBarLabel: '最热',
-    // Note: By default the icon is only shown on iOS. Search the showIcon option below.
-    tabBarIcon: ({ tintColor }) => (
-      <Image
-        source={require('../../res/images/ic_favorite.png')}
-        style={[styles.icon, {tintColor: tintColor}]}
-      />
-    ),
-  };
+// class HotScreen extends React.Component {
+//   static navigationOptions = {
+//     tabBarLabel: '最热',
+//     // Note: By default the icon is only shown on iOS. Search the showIcon option below.
+//     tabBarIcon: ({ tintColor }) => (
+//       <Image
+//         source={require('../../res/images/ic_favorite.png')}
+//         style={[styles.icon, {tintColor: tintColor}]}
+//       />
+//     ),
+//   };
 
-  render() {
-    return (
-      <Button
-        onPress={() => this.props.navigation.navigate('Notifications')}
-        title="Go to 趋势"
-      />
-    );
-  }
-}
+//   render() {
+//     return (
+//       <Button
+//         onPress={() => this.props.navigation.navigate('Notifications')}
+//         title="Go to 趋势"
+//       />
+//     );
+//   }
+// }
 
 class TrendingScreen extends React.Component {
   static navigationOptions = {
@@ -63,7 +64,7 @@ const styles = StyleSheet.create({
 
 const MainScreenNavigator = TabNavigator(
   {
-    HotScreen: { screen: HotScreen },
+    PopularPage: { screen: PopularPage },
     TrendingScreen: { screen: TrendingScreen },
   },
   {
