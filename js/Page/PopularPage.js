@@ -8,7 +8,9 @@ import {
   Image,
   TextInput,
   Text,
-  FlatList
+  FlatList,
+  RefreshControl,
+  StatusBar
 } from 'react-native';
 import DataRepository from '../Expand/Dao/DataRepository'
 import ScrollableTabView , {ScrollableTabBar} from 'react-native-scrollable-tab-view'
@@ -20,7 +22,7 @@ export default class PopularPage extends Component {
 
 
   static navigationOptions = {
-    tabBarLabel: '最热',
+    tabBarLabel:'最热',
     title:'最热',
     headerTintColor: 'white',
     headerStyle: {backgroundColor: "white"},
@@ -29,7 +31,7 @@ export default class PopularPage extends Component {
     tabBarIcon: ({ tintColor }) => (
       <Image
         source={require('../../res/images/ic_favorite.png')}
-        style={[styles.icon, {tintColor: tintColor}]}
+        style={[styles.icon, {tintColor: '#2186F3'}]}
       />
     ),
   };
@@ -38,6 +40,10 @@ export default class PopularPage extends Component {
   render(){
     return (
       <View style={styles.container} >
+          <StatusBar
+            backgroundColor="blue"
+            barStyle="light-content"
+          />
           <ScrollableTabView
           tabBarBackgroundColor="#2196F3"
           tabBarActiveTextColor='white'
@@ -61,7 +67,8 @@ class PopularTab extends Component {
     this.dataRepository = new DataRepository();
     this.state = {
       result:'',
-      dataSouce:[]
+      dataSouce:[],
+      refreshing: false
     }
   }
   componentDidMount(){
@@ -73,19 +80,21 @@ class PopularTab extends Component {
       let items = result.items;
       this.setState({
         // result:JSON.stringify(result) 
-        dataSouce: items
+        dataSouce: items,
+        refreshing: false 
       })
     })
     .catch(error => {
       this.setState({
-        result: JSON.stringify(error)
+        result: JSON.stringify(error),
+        refreshing: false
       })
     })
   }
   getUrl (key) { 
     return URL+key+QUERY_STR
   }
-
+  
   _onPressItem = ((id)=>{
 
   })
@@ -101,14 +110,28 @@ class PopularTab extends Component {
 
   _keyExtractor = (item, index) => item.id;
 
+  Refresh = ()=>{
+    this.setState({
+      refreshing: true
+    })
+    this.loadData()
+  }
+
   render(){
     return (
+      
       <View style={{flex: 1}}>
        <FlatList 
           style={{flex:1}}
           data={this.state.dataSouce}
           renderItem={this._renderItem}
           keyExtractor = {this._keyExtractor}
+          refreshControl={
+            <RefreshControl
+                refreshing={this.state.refreshing}
+                onRefresh={this.Refresh}
+                title="Loading..."/>
+        }
        ></FlatList>
       </View>
     )

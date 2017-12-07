@@ -71,7 +71,7 @@ const MainScreenNavigator = TabNavigator(
     tabBarPosition: 'bottom',
     animationEnabled: true,
     tabBarOptions: {
-      activeTintColor: '#e91e63',
+      activeTintColor: '#2186F3',
     },
 });
 
