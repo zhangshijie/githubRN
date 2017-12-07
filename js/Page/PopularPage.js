@@ -21,6 +21,10 @@ export default class PopularPage extends Component {
 
   static navigationOptions = {
     tabBarLabel: '最热',
+    title:'最热',
+    headerTintColor: 'white',
+    headerStyle: {backgroundColor: "white"},
+    headerTitleStyle: {alignSelf: 'center'},
     // Note: By default the icon is only shown on iOS. Search the showIcon option below.
     tabBarIcon: ({ tintColor }) => (
       <Image
@@ -35,6 +39,9 @@ export default class PopularPage extends Component {
     return (
       <View style={styles.container} >
           <ScrollableTabView
+          tabBarBackgroundColor="#2196F3"
+          tabBarActiveTextColor='white'
+          tabBarInactiveTextColor='gray'
           renderTabBar={()=> <ScrollableTabBar/>}
           >
             <PopularTab tabLabel='Java'> Java</PopularTab>
@@ -46,6 +53,7 @@ export default class PopularPage extends Component {
     )
   }
 }
+
 
 class PopularTab extends Component {
   constructor(props){
@@ -82,14 +90,6 @@ class PopularTab extends Component {
 
   })
 
-  // _renderItem = ((item)=>{
-  //   <RespositoryCell />
-
-  //   // var txt = '第' + item.index + '个' + ' title=' + item.item.full_name;
-  //   // var bgColor = item.index % 2 == 0 ? 'red' : 'blue';
-  //   // return <Text style={[{flex:1,height:40,backgroundColor:bgColor},styles.txt]}>{txt}</Text>
-  // });
-
   _renderItem = ({item}) => (
     <RespositoryCell 
       description={item.description}
@@ -122,5 +122,9 @@ const styles =  StyleSheet.create({
    },
    tips: {
      fontSize: 28
-   }
+   },
+   icon: {
+    width: 26,
+    height: 26,
+    }
 })

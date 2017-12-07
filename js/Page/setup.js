@@ -77,6 +77,14 @@ const MainScreenNavigator = TabNavigator(
 
 const SimpleApp = StackNavigator({
   Home: { screen: MainScreenNavigator },
+},{
+  navigationOptions: {
+    headerStyle: {
+      backgroundColor: '#2196F3',
+      
+    },
+    
+  }
 });
 
   

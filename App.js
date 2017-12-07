@@ -12,7 +12,6 @@ import {
   View,
   Image,
 } from 'react-native';
-import {StackNavigator} from 'react-navigation';
 import MainScreenNavigator from './js/Page/setup'
 
 
